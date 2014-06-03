@@ -1,5 +1,5 @@
-FROM ubuntu:12.10
-MAINTAINER Ken Cochrane "kencochrane@gmail.com"
+FROM ubuntu:14.04       1
+MAINTAINER "Adam Feuer" <adam@adamfeuer.com>
 RUN apt-get -qq update
 RUN apt-get install -y python-dev python-setuptools supervisor git-core
 RUN easy_install pip
@@ -10,7 +10,7 @@ ADD . /opt/apps/djdocker
 ADD .docker/supervisor.conf /opt/supervisor.conf
 ADD .docker/run.sh /usr/local/bin/run
 RUN (cd /opt/apps/djdocker && git remote rm origin)
-RUN (cd /opt/apps/djdocker && git remote add origin https://github.com/kencochrane/django-docker.git)
+RUN (cd /opt/apps/djdocker && git remote add origin https://github.com/adamfeuer/django-docker.git)
 RUN /opt/ve/djdocker/bin/pip install -r /opt/apps/djdocker/requirements.txt
 RUN (cd /opt/apps/djdocker && /opt/ve/djdocker/bin/python manage.py syncdb --noinput)
 RUN (cd /opt/apps/djdocker && /opt/ve/djdocker/bin/python manage.py collectstatic --noinput)
